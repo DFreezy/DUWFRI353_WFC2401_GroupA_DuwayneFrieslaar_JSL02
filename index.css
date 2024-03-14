@@ -4,6 +4,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10em;
     background: #f0f0f3;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for background and color changes */
@@ -22,9 +23,6 @@ body, html {
     text-align: center;
 }
 
-#workoutInput {
-    margin-top: 7em;
-}
 
 button {
     background-color: #48d1cc;
