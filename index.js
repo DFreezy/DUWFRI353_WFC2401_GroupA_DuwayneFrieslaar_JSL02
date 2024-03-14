@@ -7,13 +7,23 @@ welcomeMessage();
 
 
 const displayWorkoutRoutine = () => {
-    const workoutInput = document.querySelector('#workoutInput').value;
+    const workoutInput = document.querySelector('#workoutInput').value.trim(); // Trim whitespace
     const workoutList = document.querySelector('#workoutList');
-    const newWorkout = document.createElement('li');
-    newWorkout.textContent = workoutInput;
-    workoutList.appendChild(newWorkout);
-};
 
+    // Check if the workout input is not empty
+    if (workoutInput !== '') {
+        // Check if the workout routine already exists in the list
+        if (!Array.from(workoutList.children).some(item => item.textContent === workoutInput)) {
+            const newWorkout = document.createElement('li');
+            newWorkout.textContent = workoutInput;
+            workoutList.appendChild(newWorkout);
+        } else {
+            alert('Workout routine already exists!'); // Display alert if workout routine already exists
+        }
+    } else {
+        alert('Please enter a valid workout routine!'); // Display alert if input is empty
+    }
+};
 document.querySelector('#submitWorkout').addEventListener('click', displayWorkoutRoutine);
 
 // ⚠️⚠️⚠️ Lesson 3: Creating and Removing Elements ⚠️⚠️⚠️
@@ -21,26 +31,22 @@ document.querySelector('#submitWorkout').addEventListener('click', displayWorkou
 // NOW LET'S DEBUG TO PREVENT DUPLICATE GOALS FROM BEING SUBMITTED 🚀
 
 const addNewGoal = () => {
-    const goalInput = document.querySelector('#goalInput').value;
+    const goalInput = document.querySelector('#goalInput').value.trim(); // Trim whitespace
     const goalList = document.querySelector('#goalList');
-    
-    // ⚠️ Hint 1: Check for duplicates
-    // Use 'goalList' to get all existing goals and check if 'goalInput' matches any of them.
-    
-    // ⚠️ Hint 2: Prevent duplicates
-    // If a duplicate is found, display an alert to the user and don't add the goal to the list.
-    // If it's not a duplicate, proceed with adding it as a new goal.
-    
-    // ⚠️ Hint 3: Code structure
-    // You might want to wrap the duplicate-checking logic in an 'if' statement.
-    
-    // ⚠️ Hint 4: Event listener
-    // The event listener that removes goals when clicked is not related to this issue.
-    // Focus on preventing duplicates for now.
-    
-    const newGoal = document.createElement('li');
-    newGoal.textContent = goalInput;
-    goalList.appendChild(newGoal);
+
+    // Check if the goal input is not empty
+    if (goalInput !== '') {
+        // Check if the goal already exists in the list
+        if (!Array.from(goalList.children).some(item => item.textContent === goalInput)) {
+            const newGoal = document.createElement('li');
+            newGoal.textContent = goalInput;
+            goalList.appendChild(newGoal);
+        } else {
+            alert('Goal already exists!'); // Display alert if goal already exists
+        }
+    } else {
+        alert('Please enter a valid goal!'); // Display alert if input is empty
+    }
 };
 
 // Add event listener to the goal submit button
