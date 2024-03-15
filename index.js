@@ -8,52 +8,57 @@ welcomeMessage();
 
 
 const displayWorkoutRoutine = () => {
-    const workoutInput = document.querySelector('#workoutInput').value.trim(); // Trim whitespace
+    const workoutInput = document.querySelector('#workoutInput').value.trim().toUpperCase(); // Trim whitespace and convert to uppercase
     const workoutList = document.querySelector('#workoutList');
 
     // Check if the workout input is not empty
     if (workoutInput !== '') {
         // Check if the workout routine already exists in the list
-        if (!Array.from(workoutList.children).some(item => item.textContent === workoutInput)) {
+        if (!Array.from(workoutList.children).some(item => item.textContent.toUpperCase() === workoutInput)) {
+            //Also turn any input into upper case so it doesn't duplicate by mistake because of capital letters
             const newWorkout = document.createElement('li');
             newWorkout.textContent = workoutInput;
             workoutList.appendChild(newWorkout);
-            /*Here we check if the entry has already been entered by placing and array around the workoutList children
+           /*Here we check if the entry has already been entered by placing and array around the workoutList children
             .some checks if the input matches the condition, and creating new li elements along the way, and appending it to
             it's parent element, and generating the appropriate text content if the above condition is met*/
+
         } else {
-            alert('Workout routine already exists!'); // Display alert if workout routine already exists
+            alert('Workout routine already exists!');
         }
     } else {
-        alert('Please enter a valid workout routine!'); // Display alert if input is empty
+        alert('Please enter a valid workout routine!');
     }
 };
+
 document.querySelector('#submitWorkout').addEventListener('click', displayWorkoutRoutine);
 
 
 
+
 const addNewGoal = () => {
-    const goalInput = document.querySelector('#goalInput').value.trim(); // Trim whitespace
+    const goalInput = document.querySelector('#goalInput').value.trim().toUpperCase(); // Trim whitespace and convert to uppercase
     const goalList = document.querySelector('#goalList');
 
     // Check if the goal input is not empty
     if (goalInput !== '') {
         // Check if the goal already exists in the list
-        if (!Array.from(goalList.children).some(item => item.textContent === goalInput)) {
+        if (!Array.from(goalList.children).some(item => item.textContent.toUpperCase() === goalInput)) {
             const newGoal = document.createElement('li');
             newGoal.textContent = goalInput;
             goalList.appendChild(newGoal);
-/*This line checks if the workout routine already exists in the list.
+            /*This line checks if the workout routine already exists in the list.
 Array.from(workoutList.children) converts the list of workout items (children of the workoutList element) into an array.
 .some() method checks if any item in the array meets the condition specified by the callback function. In this case, it checks if any item's text content matches the workoutInput.
 If no matching workout routine is found, the condition !Array.from(...).some(...) evaluates to true, indicating that the input is not a duplicate.*/
         } else {
-            alert('Goal already exists!'); // Display alert if goal already exists
+            alert('Goal already exists!');
         }
     } else {
-        alert('Please enter a valid goal!'); // Display alert if input is empty
+        alert('Please enter a valid goal!');
     }
 };
+
 
 // Add event listener to the goal submit button
 document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
@@ -62,13 +67,18 @@ document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
 document.querySelector('#submitGoal').addEventListener('click', addNewGoal);
 
 ///
-let waterIntake = 0; //This line is setting the starting ammount of water
-const updateWaterIntake = (change) => {
-    waterIntake += change;
-    document.querySelector('#waterIntakeDisplay').textContent = `${waterIntake} glasses 💦`;
-}; //This one is fetching the water intake id from the DOM, and displaying it on the interface by use of textContent
-
+let waterIntake = 0; //This line is setting the starting ammount of water  
 document.querySelector('#increaseWater').addEventListener('click', () => updateWaterIntake(1));
+const updateWaterIntake = (change) => {
+    // Calculate the new water intake
+    const newWaterIntake = waterIntake + change;
+    
+    // Ensure water intake doesn't go below 0
+    waterIntake = Math.max(newWaterIntake, 0);
+    
+    // Update the water intake display
+    document.querySelector('#waterIntakeDisplay').textContent = `${waterIntake} glasses 💦`;
+};
 document.querySelector('#decreaseWater').addEventListener('click', () => updateWaterIntake(-1));
 //This part is checking the water intake, and listening for click, then increasing or decreasing the ammount of water
 
